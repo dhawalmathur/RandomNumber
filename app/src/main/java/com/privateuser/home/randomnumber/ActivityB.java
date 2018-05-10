@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ActivityB extends AppCompatActivity {
@@ -16,6 +15,8 @@ public class ActivityB extends AppCompatActivity {
     private Intent intentB = null;
     private int randomNumberToReceive = 0;
     private int randomNumberToSend = 0;
+    private int minNumber = 0;
+    private int maxNumber = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,9 @@ public class ActivityB extends AppCompatActivity {
 
         // getting values through intent
         if(getIntent() != null) {
+            minNumber = getIntent().getIntExtra("minNumber", 0);
+            maxNumber = getIntent().getIntExtra("maxNumber", 0);
             randomNumberToReceive = getIntent().getIntExtra("fromA", 0);
-            // Setting Random Number to the TextView
             textB.setText(String.valueOf(randomNumberToReceive));
         }
 
@@ -39,9 +41,11 @@ public class ActivityB extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // generating random number
-                randomNumberToSend = ThreadLocalRandom.current().nextInt();
+                randomNumberToSend = ThreadLocalRandom.current().nextInt(minNumber, maxNumber);
                 // starting Activity B
                 intentB.putExtra("fromB", randomNumberToSend);
+                intentB.putExtra("minNumber", minNumber);
+                intentB.putExtra("maxNumber", maxNumber);
                 startActivity(intentB);
                 finish();
             }

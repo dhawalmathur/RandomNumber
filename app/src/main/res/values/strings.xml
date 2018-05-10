@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">RandomNumber</string>
+
+    <string name="str_textExplain">Enter the minimum and maximum range to generate a random integer between -2,147,483,648 to 2,147,483,647</string>
+    <string name="str_textMin">Minimum</string>
+    <string name="str_textMax">Maximum</string>
+    <string name="str_done">Done</string>
+    <string name="str_err_range">Integer input is out of range</string>
+
 </resources>

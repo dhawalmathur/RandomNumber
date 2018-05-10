@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="20dp"
+    tools:context=".FirstActivity">
+
+    <TextView
+        android:id="@+id/textExplain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_textExplain"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/et_minimum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/str_textMin"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:maxLength="10"
+        android:inputType="numberSigned"/>
+
+    <EditText
+        android:id="@+id/et_maximum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/str_textMax"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:maxLength="10"
+        android:inputType="numberSigned"/>
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="20dp"
+        android:text="@string/str_done"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"/>
+
+</LinearLayout>
