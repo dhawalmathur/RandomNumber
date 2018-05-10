@@ -5,6 +5,7 @@
     <string name="str_textMin">Minimum</string>
     <string name="str_textMax">Maximum</string>
     <string name="str_done">Done</string>
+    <string name="str_skip">Skip</string>
     <string name="str_err_range">Integer input is out of range</string>
 
 </resources>

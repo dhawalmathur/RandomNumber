@@ -16,6 +16,7 @@ public class FirstActivity extends AppCompatActivity {
     private EditText et_minimum = null;
     private EditText et_maximum = null;
     private Button btn_done = null;
+    private Button btn_skip = null;
     private Intent intent = null;
 
     @Override
@@ -27,6 +28,7 @@ public class FirstActivity extends AppCompatActivity {
         et_minimum = (EditText) findViewById(R.id.et_minimum);
         et_maximum = (EditText) findViewById(R.id.et_maximum);
         btn_done = (Button) findViewById(R.id.btn_done);
+        btn_skip = (Button) findViewById(R.id.btn_skip);
         intent = new Intent(FirstActivity.this, ActivityA.class);
 
         // setting on-click listener
@@ -49,8 +51,18 @@ public class FirstActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } catch (Exception ex) {
-                    Toast.makeText(FirstActivity.this,getString(R.string.str_err_range), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FirstActivity.this, getString(R.string.str_err_range), Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btn_skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // starting Activity A
+                intent.putExtra("skipped", true);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -63,10 +75,10 @@ public class FirstActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().startsWith("-") || s.toString().startsWith("+")) {
-                    et_minimum.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
+                if (s.toString().startsWith("-") || s.toString().startsWith("+")) {
+                    et_minimum.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)});
                 } else {
-                    et_minimum.setFilters(new InputFilter[] {new InputFilter.LengthFilter(10)});
+                    et_minimum.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
                 }
             }
 
@@ -84,10 +96,10 @@ public class FirstActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().startsWith("-") || s.toString().startsWith("+")) {
-                    et_maximum.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
+                if (s.toString().startsWith("-") || s.toString().startsWith("+")) {
+                    et_maximum.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)});
                 } else {
-                    et_maximum.setFilters(new InputFilter[] {new InputFilter.LengthFilter(10)});
+                    et_maximum.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
                 }
             }
 

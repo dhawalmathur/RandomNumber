@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ActivityB extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class ActivityB extends AppCompatActivity {
     private int randomNumberToSend = 0;
     private int minNumber = 0;
     private int maxNumber = 0;
+    private boolean skipped;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +31,12 @@ public class ActivityB extends AppCompatActivity {
         intentB = new Intent(ActivityB.this, ActivityA.class);
 
         // getting values through intent
-        if(getIntent() != null) {
-            minNumber = getIntent().getIntExtra("minNumber", 0);
-            maxNumber = getIntent().getIntExtra("maxNumber", 0);
+        if (getIntent() != null) {
+            skipped = getIntent().getBooleanExtra("skipped", false);
+            if (!skipped) {
+                minNumber = getIntent().getIntExtra("minNumber", 0);
+                maxNumber = getIntent().getIntExtra("maxNumber", 0);
+            }
             randomNumberToReceive = getIntent().getIntExtra("fromA", 0);
             textB.setText(String.valueOf(randomNumberToReceive));
         }
@@ -41,15 +46,19 @@ public class ActivityB extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // generating random number
-                randomNumberToSend = ThreadLocalRandom.current().nextInt(minNumber, maxNumber);
+                if (skipped) {
+                    randomNumberToSend = ThreadLocalRandom.current().nextInt();
+                } else {
+                    randomNumberToSend = ThreadLocalRandom.current().nextInt(minNumber, maxNumber);
+                    intentB.putExtra("minNumber", minNumber);
+                    intentB.putExtra("maxNumber", maxNumber);
+                }
                 // starting Activity B
+                intentB.putExtra("skipped", skipped);
                 intentB.putExtra("fromB", randomNumberToSend);
-                intentB.putExtra("minNumber", minNumber);
-                intentB.putExtra("maxNumber", maxNumber);
                 startActivity(intentB);
                 finish();
             }
         });
-
     }
 }
